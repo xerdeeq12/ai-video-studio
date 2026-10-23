@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video Studio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #08111f;
+      color: white;
+      padding: 24px 16px;
+    }
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+    }
+    .logo { color: #60a5fa; font-size: 24px; font-weight: bold; }
+    h1 { font-size: 38px; margin-bottom: 12px; }
+    p { color: #b7c5d9; line-height: 1.6; }
+    .panel {
+      background: #111e30;
+      padding: 22px;
+      border: 1px solid #263b56;
+      border-radius: 16px;
+      margin-top: 25px;
+    }
+    label { display: block; margin: 16px 0 8px; }
+    textarea, select {
+      width: 100%;
+      padding: 14px;
+      background: #08111f;
+      color: white;
+      border: 1px solid #354963;
+      border-radius: 9px;
+      font-size: 16px;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 15px;
+      background: #2563eb;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      border: 0;
+      border-radius: 9px;
+    }
+    #result { margin-top: 18px; }
+    .note { font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="logo">✦ AI VIDEO STUDIO</div>
+    <h1>Turn your ideas into videos.</h1>
+    <p>Create a video concept for motivation, stories, nature, comedy, or any idea you imagine.</p>
+
+    <section class="panel">
+      <h2>Create your video</h2>
+      <form id="videoForm">
+        <label for="prompt">Describe your video</label>
+        <textarea id="prompt" required
+          placeholder="Example: A cinematic sunrise over beautiful mountains..."></textarea>
+
+        <label for="style">Video category</label>
+        <select id="style">
+          <option>Motivation</option>
+          <option>Nature</option>
+          <option>Horror and Mystery</option>
+          <option>Comedy</option>
+          <option>Love Story</option>
+          <option>Education</option>
+          <option>Other</option>
+        </select>
+
+        <button type="submit">Generate Video Idea</button>
+      </form>
+      <div id="result" aria-live="polite"></div>
+      <p class="note">Prototype version — actual AI video generation will be connected later.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("videoForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const prompt = document.getElementById("prompt").value.trim();
+      const style = document.getElementById("style").value;
+      const result = document.getElementById("result");
+
+      if (!prompt) return;
+
+      result.replaceChildren();
+      const heading = document.createElement("h3");
+      heading.textContent = "Your video brief is ready!";
+      const category = document.createElement("p");
+      category.textContent = "Category: " + style;
+      const description = document.createElement("p");
+      description.textContent = "Your idea: " + prompt;
+      result.append(heading, category, description);
+    });
+  </script>
+</body>
+</html>
